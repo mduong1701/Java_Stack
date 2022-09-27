@@ -1,0 +1,57 @@
+import java.lang.Math;
+
+public class BankAccount{
+
+    private double checkingBalance = 0;
+    private double savingBalance = 0;
+    private int accountNumber = 0;
+    private static int numberOfAccounts = 0;
+    private static double totalAllAccounts = 0;
+
+    public BankAccount(double checking, double saving){
+        this.checkingBalance = checking;
+        this.savingBalance = saving;
+        this.accountNumber = generateAccountNumber();
+        numberOfAccounts++;
+    }
+
+    public double getChecking(){
+        return this.checkingBalance;
+    }
+
+    public double getSaving(){
+        return this.savingBalance;
+    }
+
+    public void deposit(double checkingDeposit, double savingDeposit){
+        this.checkingBalance += checkingDeposit;
+        this.savingBalance += savingDeposit;
+        totalAllAccounts = totalAllAccounts + checkingDeposit + savingDeposit;
+    }
+
+    public void withdrawFromChecking(double amount){
+        if (this.checkingBalance < amount){
+            System.out.println("Insufficient fund");
+        }
+        else {
+            this.checkingBalance -= amount;
+        }
+    }
+
+    public void withdrawFromSaving(double amount){
+        if (this.savingBalance < amount){
+            System.out.println("Insufficient fund");
+        }
+        else {
+            this.savingBalance -= amount;
+        }
+    }
+
+    public double getTotal(){
+        return this.checkingBalance + this.savingBalance;
+    }
+
+    private int generateAccountNumber(){
+        return (int)Math.floor(Math.random() * 10000000000);
+    }
+}
